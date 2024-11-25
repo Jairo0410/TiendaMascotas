@@ -1,7 +1,10 @@
 package Data;
 
+import Domain.Alimento;
 import Domain.Articulo;
+import Domain.Higiene;
 import Domain.InventarioTienda;
+import Domain.Juguete;
 import Utility.ArticulosConstante;
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -23,11 +26,11 @@ public class InventarioTiendaData {
     public InventarioTiendaData(String rutaArchivo) {
         this.rutaArchivo = rutaArchivo;
     }
-
-    public boolean guardarArticulo(Articulo articulos) throws IOException {
+    
+    public boolean guardarArticulo(Articulo articulo) throws IOException {
         BufferedWriter bw = new BufferedWriter(new FileWriter(rutaArchivo, true));
 
-        bw.write(articulos.getId() + ";" + articulos.getNombre() + ";" + articulos.getPrecio() + ";" + articulos.getCantExistente());
+        bw.write(articulo.representacionArchivo());
         bw.newLine();
         bw.flush();
         
@@ -45,7 +48,27 @@ public class InventarioTiendaData {
 
         while (linea != null) {
             String datos[] = linea.split(";");
-            Articulo articulo = new Articulo(Integer.parseInt(datos[0]), datos[1], Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+            
+            // TODO: Arreglar esto despues
+            int id = Integer.parseInt(datos[0]);
+            String tipo = datos[1];
+            String nombre = datos[2];
+            int precio = Integer.parseInt(datos[3]);
+            int cantidad = Integer.parseInt(datos[4]);
+            
+            Articulo articulo;
+            
+            if (tipo.equals("Higiene")) {
+                float duracionEfecto = Float.parseFloat(datos[5]);
+                articulo = new Higiene(duracionEfecto, id, nombre, precio, cantidad);
+            } else if (tipo.equals("Alimento")) {
+                int valorNutricional = Integer.parseInt(datos[5]);
+                articulo = new Alimento(valorNutricional, id, nombre, precio, cantidad);
+            } else {
+                float nivelDiversion = Float.parseFloat(datos[5]);
+                articulo = new Juguete(nivelDiversion, id, nombre, precio, cantidad);
+            }
+            
             linea = br.readLine();
             articulos.add(articulo);
         }
@@ -71,7 +94,7 @@ public class InventarioTiendaData {
                 bw.write(linea);
                 bw.newLine();
             } else {
-                bw.write(articulos.getId() + ";" + articulos.getNombre() + ";" + articulos.getPrecio() + ";" + articulos.getCantExistente());
+                bw.write(articulos.representacionArchivo());
                 bw.newLine();
             }
             linea = br.readLine();
@@ -109,7 +132,26 @@ public class InventarioTiendaData {
 
         while (linea != null) {
             String datos[] = linea.split(";");
-            Articulo articulo = new Articulo(Integer.parseInt(datos[0]), datos[1], Integer.parseInt(datos[2]), Integer.parseInt(datos[3]));
+            
+            // TODO: Arreglar esto despues
+            int id = Integer.parseInt(datos[0]);
+            String tipo = datos[1];
+            String nombre = datos[2];
+            int precio = Integer.parseInt(datos[3]);
+            int cantidad = Integer.parseInt(datos[4]);
+            
+            Articulo articulo;
+            
+            if (tipo.equals("Higiene")) {
+                float duracionEfecto = Float.parseFloat(datos[5]);
+                articulo = new Higiene(duracionEfecto, id, nombre, precio, cantidad);
+            } else if (tipo.equals("Alimento")) {
+                int valorNutricional = Integer.parseInt(datos[5]);
+                articulo = new Alimento(valorNutricional, id, nombre, precio, cantidad);
+            } else {
+                float nivelDiversion = Float.parseFloat(datos[5]);
+                articulo = new Juguete(nivelDiversion, id, nombre, precio, cantidad);
+            }
             linea = br.readLine();
 
             if (articulo.getId() == idArticulo) {

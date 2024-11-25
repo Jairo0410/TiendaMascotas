@@ -3,9 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Net/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Data/InventarioData.java</file>
-            <file>file:/E:/Net/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/GUI/RegistrarUsuario.java</file>
-            <file>file:/E:/Net/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/GUI/TiendaArticulos.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Higiene.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Ave.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Perro.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Data/InventarioTiendaData.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Mascota.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Gato.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Alimento.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Juguete.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Business/InventarioTiendaBusiness.java</file>
+            <file>file:/C:/Users/jairo/Downloads/TiendaMascotasKevinFuentesSemestreIIAnno2024/TiendaMascotasKevinFuentesSemestreIIAnno2024/src/Domain/Articulo.java</file>
         </group>
     </open-files>
 </project-private>

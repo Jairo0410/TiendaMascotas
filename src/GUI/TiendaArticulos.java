@@ -2,6 +2,7 @@ package GUI;
 
 import Business.InventarioTiendaBusiness;
 import Business.InventarioUsuarioBusiness;
+import Business.UsuarioEstandarBusiness;
 import Data.UsuarioEstandarData;
 import Domain.Articulo;
 import Domain.InventarioTienda;
@@ -18,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -108,9 +110,14 @@ public class TiendaArticulos extends JInternalFrame implements ActionListener, M
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource() == comprar) {
-            InventarioTiendaBusiness inventarioBusiness = new InventarioTiendaBusiness();
+            if (lista.getSelectedValue() == null) {
+                JOptionPane.showMessageDialog(this, "Seleccione un articulo", "Error", JOptionPane.ERROR_MESSAGE);
+                return;
+            }
+            
+            InventarioTiendaBusiness inventarioTiendaBusiness = new InventarioTiendaBusiness();
             InventarioUsuarioBusiness invUsuarioB = new InventarioUsuarioBusiness();
-            UsuarioEstandarData usuarioData = new UsuarioEstandarData("archivoAdmin.txt");
+            UsuarioEstandarBusiness usuarioBusiness = new UsuarioEstandarBusiness();
 
             Articulo articuloSeleccionado = null;
 
@@ -130,19 +137,14 @@ public class TiendaArticulos extends JInternalFrame implements ActionListener, M
             
             int cantComprada = Integer.parseInt(campo.getText());
 
-            int restaArticulos = articuloSeleccionado.getCantExistente() - cantComprada;
-            int restaSaldo = usuarioActual.getSaldo() - articuloSeleccionado.getPrecio() * cantComprada;
+            int totalCompra = articuloSeleccionado.getPrecio() * cantComprada;
 
             try {
-                articuloSeleccionado.setCantExistente(restaArticulos);
-                inventarioBusiness.actualizarArticulo(articuloSeleccionado);
-
-                usuarioActual.setSaldo(restaSaldo);
-                usuarioData.actualizarUsuario(usuarioActual);
-
+                usuarioBusiness.descontarSaldo(usuarioActual, totalCompra);
+                inventarioTiendaBusiness.descontarInventario(articuloSeleccionado, cantComprada);
                 invUsuarioB.agregarInventario(usuarioActual, articuloSeleccionado,cantComprada);
                         
-                ArrayList<Articulo> articulosActualizado = inventarioBusiness.obtenerInventario();
+                ArrayList<Articulo> articulosActualizado = inventarioTiendaBusiness.obtenerInventario();
 
                 inventario.setArticulos(articulosActualizado);
 
@@ -150,8 +152,10 @@ public class TiendaArticulos extends JInternalFrame implements ActionListener, M
                 cantidad.setText("Cantidad: " + inventario.getArticulos().get(indiceArticuloSeleccionado).getCantExistente());
                 cantCreditos.setText("Creditos: " + usuarioActual.getSaldo());
 
-            } catch (IOException ex) {
-                System.out.println(ex.getMessage());
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+                
+                ex.printStackTrace();
             }
             System.out.println("Sirve");
 

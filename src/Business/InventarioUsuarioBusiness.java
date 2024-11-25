@@ -19,17 +19,21 @@ public class InventarioUsuarioBusiness {
         this.inventarioUData = new InventarioUsuarioData(ConstanteArchivos.RUTA_INVENTARIO_USUARIO);
     }
 
-    public void agregarInventario(UsuarioEstandar usuario, Articulo articulo, int cantComprada) throws IOException {
+    public void agregarInventario(UsuarioEstandar usuario, Articulo articulo, int cantComprada) throws IOException, Exception {
         Articulo articuloEncontrado = null;
 
+        if (usuario.getSaldo() < articulo.getPrecio() * cantComprada) {
+            throw new Exception("El usuario no tiene suficiente saldo para realizar la compra");
+        }
+        
         if (inventarioUData.existeArchivo()) {
             articuloEncontrado = inventarioUData.obtenerArticulo(usuario.getIdentificacion(), articulo.getId());
         }
         if (articuloEncontrado == null) {
             inventarioUData.guardarArticulo(articulo, usuario, cantComprada);
         } else {
-            articulo.setCantExistente(articulo.getCantExistente() + cantComprada);
-            inventarioUData.actualizarArticulo(articulo, usuario);
+            articuloEncontrado.setCantExistente(articuloEncontrado.getCantExistente() + cantComprada);
+            inventarioUData.actualizarArticulo(articuloEncontrado, usuario);
         }
 
     }

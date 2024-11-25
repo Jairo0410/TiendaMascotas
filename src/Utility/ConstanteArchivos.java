@@ -13,6 +13,7 @@ public class ConstanteArchivos {
     public  static final String RUTA_INVENTARIO_USUARIO="inventarioUsuario.txt";
     public  static final String RUTA_INVENTARIO_TIENDA="inventarioTienda.txt";
     public static final String RUTA_MASCOTAS="mascotas.bin";
+    public static final String RUTA_USUARIOS_ESTANDAR="archivoAdmin.txt";
     
     
     

@@ -8,7 +8,7 @@ package Domain;
  *
  * @author Kevin
  */
-public class Mascota {
+public abstract class Mascota {
 
     private String nombre;
     private String descripcion;
@@ -116,21 +116,17 @@ public class Mascota {
         this.idUsuario = idUsuario;
     }
 
-    public int getPrecio() {
-
-        return 0;
-    }
+    public abstract int getPrecio();
 
     public void acumularPuntos() {
 
     }
 
     public void aprenderTruco(Truco truco) 
-    {
-        float experienciaAdquirida = 0;
-        
-        experienciaAdquirida = experiencia + truco.getExperienciaRecompensa();
-
+    {   
+        setExperiencia(experiencia + truco.getExperienciaRecompensa());
     }
+    
+    public abstract String representacionArchivo();
 
 }

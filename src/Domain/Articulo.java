@@ -8,19 +8,21 @@ package Domain;
  *
  * @author Kevin
  */
-public class Articulo {
+public abstract class Articulo {
 
     private int id;
     private String nombre;
     private int precio;
     private int cantExistente;
+    private String tipo;
   
-    public Articulo(int id, String nombre, int precio,int cantExistente)
+    public Articulo(int id, String nombre, int precio,int cantExistente, String tipo)
     {
         this.id = id;
         this.nombre = nombre;
         this.precio = precio;
         this.cantExistente=cantExistente;
+        this.tipo = tipo;
     }
     
     public int getId() {
@@ -55,9 +57,15 @@ public class Articulo {
         this.cantExistente = cantExistente;
     }
 
-    public void efectoArticulo(Mascota mascota)
-    {
-
+    public String getTipo() {
+        return tipo;
+    }
+    
+    public void setTipo(String tipo) {
+        this.tipo = tipo;
     }
 
+    public abstract void efectoArticulo(Mascota mascota);
+    
+    public abstract String representacionArchivo();
 }

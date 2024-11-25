@@ -10,11 +10,13 @@ package Domain;
  */
 public class Ave extends Mascota {
 
-    public Ave(String nombre, String descripcion, int edad, String tipo, int idUsuario) {
-        super(nombre, descripcion, edad, tipo, idUsuario);
+    public Ave(String nombre, String descripcion, int edad, int idUsuario) {
+        super(nombre, descripcion, edad, "Ave", idUsuario);
     }
 
-   
+    public Ave(String nombre, String descripcion, int edad, float vida, float nivelDiversion, float experiencia, String tipo, int idUsuario) {
+        super(nombre, descripcion, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+    }
 
     public Ave() {
         super();
@@ -24,6 +26,11 @@ public class Ave extends Mascota {
     public int getPrecio() {
         int precio = 500;
         return precio;
+    }
+
+    @Override
+    public String representacionArchivo() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
 }

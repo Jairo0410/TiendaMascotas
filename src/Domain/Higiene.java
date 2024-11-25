@@ -9,7 +9,7 @@ public class Higiene extends Articulo{
     private float duracionEfecto;
 
     public Higiene(float duracionEfecto, int id, String nombre, int precio, int cantExistente) {
-        super(id, nombre, precio, cantExistente);
+        super(id, nombre, precio, cantExistente, "Higiene");
         this.duracionEfecto = duracionEfecto;
     }
 
@@ -21,8 +21,14 @@ public class Higiene extends Articulo{
         this.duracionEfecto = duracionEfecto;
     }
 
-    
-    
-    
+    @Override
+    public void efectoArticulo(Mascota mascota) {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
+    @Override
+    public String representacionArchivo() {
+        return this.getId() + ";" + this.getTipo() + ";" + this.getNombre() + ";" + this.getPrecio() + ";" + this.getCantExistente() + ";" + this.getDuracionEfecto();
+    }
     
 }

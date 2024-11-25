@@ -104,7 +104,6 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
             if (usuarioLog != null) {
                 TiendaArticulos tiendaArticulos = new TiendaArticulos();
                 this.escritorio.add(tiendaArticulos);
-                System.out.println("Sora");
             } else {
                 InicioSesion inicio = new InicioSesion();
                 this.escritorio.add(inicio);
@@ -113,7 +112,7 @@ public class VentanaPrincipal extends JFrame implements ActionListener {
 
         if (e.getSource() == itemListaMascota) {
             if (usuarioLog != null) {
-                MostrarMascota mosMas = new MostrarMascota(this.escritorio);
+                MostrarMascota mosMas = new MostrarMascota();
                 this.escritorio.add(mosMas);
             } else {
                 InicioSesion inicio = new InicioSesion();

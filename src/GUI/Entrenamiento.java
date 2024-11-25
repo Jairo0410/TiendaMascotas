@@ -90,6 +90,8 @@ public class Entrenamiento extends JInternalFrame implements ActionListener, Mou
         panel.add(listaTrucos);
 
         panel.add(entrenar);
+        
+        entrenar.addActionListener(this);
 
         add(panel);
         setClosable(true);

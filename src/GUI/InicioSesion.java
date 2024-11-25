@@ -1,5 +1,6 @@
 package GUI;
 
+import Business.AdministradorBusiness;
 import Data.AdministradorData;
 import Domain.UsuarioEstandar;
 import Utility.ManejoSesion;
@@ -11,6 +12,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
@@ -79,19 +81,24 @@ public class InicioSesion extends JInternalFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        AdministradorData adminData = new AdministradorData("archivoAdmin.txt");
+        AdministradorBusiness adminBusiness = new AdministradorBusiness();
 
         if (e.getSource() == botonInicio) {
             int identificacion = Integer.parseInt(idT.getText());
             String contras = new String(contraT.getPassword());
 
             try {
-                UsuarioEstandar usuario = (UsuarioEstandar) adminData.inicioSesion(identificacion, contras);
+                UsuarioEstandar usuario = (UsuarioEstandar) adminBusiness.inicioSesion(identificacion, contras);
+                
+                if (usuario == null) {
+                    JOptionPane.showMessageDialog(this, "No existe usuario registrado con esas credenciales", "Error", JOptionPane.ERROR_MESSAGE);
+                }
 
                 ManejoSesion.guardarSesion(usuario);
+                this.setVisible(false);
 
             } catch (IOException ex) {
-                Logger.getLogger(RegistrarUsuario.class.getName()).log(Level.SEVERE, null, ex);
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }

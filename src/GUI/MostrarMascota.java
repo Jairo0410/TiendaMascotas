@@ -47,10 +47,7 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
 
     private ArrayList<Mascota> mascotasUsuario;
 
-    private Container contenedor;
-
-    public MostrarMascota(Container contenedor) {
-        this.contenedor = contenedor;
+    public MostrarMascota() {
         init();
     }
 
@@ -131,7 +128,7 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
 
             }
             if (mascotaSeleccionada != null) {
-                this.contenedor.add(new Entrenamiento(mascotaSeleccionada));
+                this.getParent().add(new Entrenamiento(mascotaSeleccionada));
                 System.out.println("Si entrea");
 
             }
@@ -155,7 +152,6 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
                 nivelLabel.setText("Nivel: " + mascotas.getNivelDiversion());
                 experienciaLabel.setText("Experiencia: " + mascotas.getExperiencia());
                 tipoLabel.setText("Tipo: " + mascotas.getTipo());
-                System.out.println("SI pa");
             }
 
         }

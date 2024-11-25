@@ -6,6 +6,7 @@ package Business;
 
 import Data.MascotaData;
 import Domain.Mascota;
+import Domain.UsuarioEstandar;
 import Utility.ConstanteArchivos;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -23,8 +24,12 @@ public class MascotaBusiness {
         this.mascotaData = new MascotaData(ConstanteArchivos.RUTA_MASCOTAS);
     }
 
-    public boolean registrarMascota(Mascota mascota) throws FileNotFoundException, IOException {
-        return this.mascotaData.registrarMascota(mascota);
+    public boolean registrarMascota(Mascota mascota, UsuarioEstandar usuario) throws FileNotFoundException, IOException, Exception {
+        if (usuario.getSaldo() < mascota.getPrecio()) {
+            throw new Exception("El usuario no tiene suficiente creditos para adoptar");
+        } else {
+            return this.mascotaData.registrarMascota(mascota);
+        }
     }
 
     public ArrayList<Mascota> leer() throws FileNotFoundException, IOException {

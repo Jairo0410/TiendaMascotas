@@ -1,5 +1,7 @@
 package GUI;
 
+import Business.MascotaBusiness;
+import Business.UsuarioEstandarBusiness;
 import Data.MascotaData;
 import Data.UsuarioEstandarData;
 import Domain.Mascota;
@@ -18,6 +20,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JInternalFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -111,7 +114,7 @@ public class RegistrarMascota extends JInternalFrame implements ActionListener, 
     @Override
     public void actionPerformed(ActionEvent e) {
 
-        MascotaData masData = new MascotaData("archivoMascota.bin");
+        MascotaBusiness masData = new MascotaBusiness();
         Mascota mascotaSeleccionada = null;
 
         if (e.getSource() == registrar) {
@@ -121,25 +124,23 @@ public class RegistrarMascota extends JInternalFrame implements ActionListener, 
             String tipo = tipoT.getSelectedItem().toString();
             
             UsuarioEstandar usuarioInicio = (UsuarioEstandar) ManejoSesion.getUsuarioIniciado();
-            if (tipoT.getSelectedItem().toString().equals("Perro")) {
+            if (tipo.equals("Perro")) {
                 mascotaSeleccionada = new Perro(nombre, descripcion, edad, tipo, usuarioInicio.getIdentificacion());
-            } else if (tipoT.getSelectedItem().toString().equals("Gato")) {
-                mascotaSeleccionada = new Gato(nombre, descripcion, edad, tipo, usuarioInicio.getIdentificacion());
+            } else if (tipo.equals("Gato")) {
+                mascotaSeleccionada = new Gato(nombre, descripcion, edad, usuarioInicio.getIdentificacion());
             } else {
-                mascotaSeleccionada = new Ave(nombre, descripcion, edad, tipo, usuarioInicio.getIdentificacion());
+                mascotaSeleccionada = new Ave(nombre, descripcion, edad, usuarioInicio.getIdentificacion());
             }
 
-            UsuarioEstandarData usuarioInicioData = new UsuarioEstandarData("archivoAdmin.txt");
-            int restaMascosta = usuarioInicio.getSaldo() - mascotaSeleccionada.getPrecio();
+            UsuarioEstandarBusiness usuarioEstandarBusi = new UsuarioEstandarBusiness();
 
             try {
-                masData.registrarMascota(new Mascota(nombre, descripcion, edad, tipo, usuarioInicio.getIdentificacion()));
+                usuarioEstandarBusi.descontarSaldo(usuarioInicio, mascotaSeleccionada.getPrecio());
+                masData.registrarMascota(mascotaSeleccionada, usuarioInicio);
+                
 
-                usuarioInicio.setSaldo(restaMascosta);
-                usuarioInicioData.actualizarUsuario(usuarioInicio);
-
-            } catch (IOException ex) {
-
+            } catch (Exception ex) {
+                JOptionPane.showMessageDialog(this, ex.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
             }
 
         }

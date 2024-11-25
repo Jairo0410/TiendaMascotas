@@ -76,12 +76,13 @@ public class InventarioUsuarioData {
         String linea = br.readLine();
         while (linea != null) {
             String datos[] = linea.split(";");
-            if (articulo.getId() == Integer.parseInt(datos[0]) && usuario.getNombre().equals(datos[1])) {
-                bw.write(linea);
+            if (datos.length > 1 && articulo.getId() == Integer.parseInt(datos[0]) && usuario.getIdentificacion() == Integer.parseInt(datos[1])) {
+                
+                bw.write(articulo.getId() + ";" + usuario.getIdentificacion()+ ";" + articulo.getCantExistente());
+
                 bw.newLine();
             } else {
-                bw.write(articulo.getId() + ";" + usuario.getNombre() + ";" + articulo.getCantExistente());
-
+                bw.write(linea);
                 bw.newLine();
             }
             linea = br.readLine();
@@ -106,9 +107,10 @@ public class InventarioUsuarioData {
 
         while (linea != null) {
             String datos[] = linea.split(";");
-            if (Integer.parseInt(datos[0]) == idArticulo && Integer.parseInt(datos[1]) == idUsuario) {
+            if (datos.length > 1 && Integer.parseInt(datos[0]) == idArticulo && Integer.parseInt(datos[1]) == idUsuario) {
 
                 Articulo articulo = inventarioData.obtenerArticulo(idArticulo);
+                articulo.setCantExistente(Integer.parseInt(datos[2]));
                 br.close();
                 return articulo;
             }

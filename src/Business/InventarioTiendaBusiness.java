@@ -29,9 +29,15 @@ public class InventarioTiendaBusiness {
     public ArrayList<Articulo> obtenerInventario() throws IOException {
         return this.inventarioTiendaData.obtenerInventario();
     }
-
-    public boolean actualizarArticulo(Articulo articulos) throws IOException {
-        return this.inventarioTiendaData.actualizarArticulo(articulos);
+    
+    public boolean descontarInventario(Articulo articulos, int cantComprada) throws IOException, Exception {
+        if (articulos.getCantExistente() < cantComprada) {
+            throw new Exception("No hay suficientes unidades en inventario");
+        }
+        
+        articulos.setCantExistente(articulos.getCantExistente() - cantComprada);
+        
+        return inventarioTiendaData.actualizarArticulo(articulos);
     }
 
     public void guardarInvInicial() throws IOException {

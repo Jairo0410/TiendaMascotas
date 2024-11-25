@@ -1,12 +1,12 @@
-1;Pelota;200;20
-25;Hueso de goma;300;20
-77;Pollo sonoro;100;20
-100;Frisbee;600;20
-80;Proteina;1500;20
-82;Croquetas;500;10
-84;Enlatado;800;20
-86;Semillas;600;20
-50;Shampoo;2000;20
-55;Talco Pulguicida;1000;20
-60;Repelente;200;20
-65;Pasta Dental;2000;20
+1;Juguete;Pelota;200;20;10.0
+25;Juguete;Hueso de goma;300;20;20.0
+77;Juguete;Pollo sonoro;100;20;5.0
+100;Juguete;Frisbee;600;20;50.0
+80;Alimento;Proteina;1500;20;50
+82;Alimento;Croquetas;500;2;20
+84;Alimento;Enlatado;800;15;30
+86;Alimento;Semillas;600;20;10
+50;Higiene;Shampoo;2000;20;120.0
+55;Higiene;Talco Pulguicida;1000;20;200.0
+60;Higiene;Repelente;200;17;100.0
+65;Higiene;Pasta Dental;2000;20;30.0

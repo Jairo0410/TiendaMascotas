@@ -1,7 +1,9 @@
 package Data;
 
+import Domain.Ave;
+import Domain.Gato;
 import Domain.Mascota;
-import Domain.UsuarioEstandar;
+import Domain.Perro;
 import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.FileInputStream;
@@ -50,16 +52,25 @@ public class MascotaData {
 
         while (dis.available() > 0) {
 
-            Mascota mascota = new Mascota(
-                    dis.readUTF(),
-                    dis.readUTF(),
-                    dis.readInt(),
-                    dis.readFloat(),
-                    dis.readFloat(),
-                    dis.readFloat(),
-                    dis.readUTF(),
-                    dis.readInt()
-            );
+            String nombre = dis.readUTF();
+            String description = dis.readUTF();
+            int edad = dis.readInt();
+            float vida = dis.readFloat();
+            float nivelDiversion = dis.readFloat();
+            float experiencia = dis.readFloat();
+            String tipo = dis.readUTF();
+            int idUsuario = dis.readInt();
+            
+            // TODO: Arreglar esto luego
+            Mascota mascota;
+            
+            if (tipo.equals("Perro")) {
+                mascota = new Perro(nombre, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            } else if (tipo.equals("Gato")) {
+                mascota = new Gato(nombre, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            } else {
+                mascota = new Ave(nombre, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            }
 
             mascotas.add(mascota);
         }
@@ -94,16 +105,25 @@ public class MascotaData {
 
         while (dis.available() > 0) {
 
-            Mascota mascota = new Mascota(
-                    dis.readUTF(),
-                    dis.readUTF(),
-                    dis.readInt(),
-                    dis.readFloat(),
-                    dis.readFloat(),
-                    dis.readFloat(),
-                    dis.readUTF(),
-                    dis.readInt()
-            );
+            String nombreMascota = dis.readUTF();
+            String description = dis.readUTF();
+            int edad = dis.readInt();
+            float vida = dis.readFloat();
+            float nivelDiversion = dis.readFloat();
+            float experiencia = dis.readFloat();
+            String tipo = dis.readUTF();
+            int idUsuario = dis.readInt();
+            
+            // TODO: Arreglar esto luego
+            Mascota mascota;
+            
+            if (tipo.equals("Perro")) {
+                mascota = new Perro(nombreMascota, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            } else if (tipo.equals("Gato")) {
+                mascota = new Gato(nombreMascota, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            } else {
+                mascota = new Ave(nombreMascota, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            }
 
             if (mascota.getNombre().equals(nombre)) {
 
@@ -127,16 +147,25 @@ public class MascotaData {
 
         while (dis.available() > 0) {
 
-            Mascota mascota = new Mascota(
-                    dis.readUTF(),
-                    dis.readUTF(),
-                    dis.readInt(),
-                    dis.readFloat(),
-                    dis.readFloat(),
-                    dis.readFloat(),
-                    dis.readUTF(),
-                    dis.readInt()
-            );
+            String nombreMascota = dis.readUTF();
+            String description = dis.readUTF();
+            int edad = dis.readInt();
+            float vida = dis.readFloat();
+            float nivelDiversion = dis.readFloat();
+            float experiencia = dis.readFloat();
+            String tipo = dis.readUTF();
+            int idUsuario = dis.readInt();
+            
+            // TODO: Arreglar esto luego
+            Mascota mascota;
+            
+            if (tipo.equals("Perro")) {
+                mascota = new Perro(nombreMascota, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            } else if (tipo.equals("Gato")) {
+                mascota = new Gato(nombreMascota, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            } else {
+                mascota = new Ave(nombreMascota, description, edad, vida, nivelDiversion, experiencia, tipo, idUsuario);
+            }
 
             if (mascota.getIdUsuario() == identificacion) {
                 mascotas.add(mascota);
