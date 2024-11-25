@@ -6,6 +6,7 @@ import Domain.Usuario;
 import Domain.UsuarioEstandar;
 import Utility.ConstanteArchivos;
 import java.io.IOException;
+import java.util.ArrayList;
 
 /**
  *
@@ -36,6 +37,10 @@ public class InventarioUsuarioBusiness {
             inventarioUData.actualizarArticulo(articuloEncontrado, usuario);
         }
 
+    }
+    
+    public ArrayList<Articulo> obtenerInventarioUsuario(int idUsuario) throws IOException {
+        return inventarioUData.obtenerInventario(idUsuario);
     }
 
 }

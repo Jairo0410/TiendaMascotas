@@ -50,7 +50,7 @@ public class InventarioUsuarioData {
             String datos[] = linea.split(";");
 
             linea = br.readLine();
-            if (Integer.parseInt(datos[1]) == idUsuario) {
+            if (datos.length > 1 && Integer.parseInt(datos[1]) == idUsuario) {
                 Articulo articulo = invTiendaData.obtenerArticulo(Integer.parseInt(datos[0]));
                 articulo.setCantExistente(Integer.parseInt(datos[2]));
                 articulos.add(articulo);

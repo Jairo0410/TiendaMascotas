@@ -43,7 +43,8 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
 
     private JPanel panel;
 
-    private JButton entrenar;
+    private JButton entrenarBoton;
+    private JButton interactuarBoton;
 
     private ArrayList<Mascota> mascotasUsuario;
 
@@ -66,7 +67,9 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
         nivelLabel = new JLabel("Nivel");
         experienciaLabel = new JLabel("Experiencia");
         tipoLabel = new JLabel("Tipo");
-        entrenar = new JButton("Entrenar");
+        
+        entrenarBoton = new JButton("Entrenar");
+        interactuarBoton = new JButton("Interactuar");
 
         nombreLabel.setBounds(150, 10, 100, 20);
         descLabel.setBounds(150, 30, 100, 20);
@@ -75,7 +78,9 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
         nivelLabel.setBounds(150, 90, 100, 20);
         experienciaLabel.setBounds(150, 110, 100, 20);
         tipoLabel.setBounds(150, 130, 100, 20);
-        entrenar.setBounds(150, 170, 100, 20);
+        
+        entrenarBoton.setBounds(150, 170, 100, 20);
+        interactuarBoton.setBounds(150, 200, 100, 20);
 
         try {
             mascotasUsuario = mascostaData.obtenerMascotasUsuario(ManejoSesion.getUsuarioIniciado().getIdentificacion());
@@ -92,7 +97,9 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
 
         listaMascotas.setBounds(10, 10, 100, 230);
 
-        entrenar.addActionListener(this);
+        entrenarBoton.addActionListener(this);
+        interactuarBoton.addActionListener(this);
+        
         listaMascotas.addMouseListener(this);
 
         panel.setLayout(null);
@@ -105,7 +112,9 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
         panel.add(nivelLabel);
         panel.add(experienciaLabel);
         panel.add(tipoLabel);
-        panel.add(entrenar);
+        
+        panel.add(interactuarBoton);
+        panel.add(entrenarBoton);
 
         panel.add(listaMascotas);
 
@@ -117,7 +126,7 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == entrenar) {
+        if (e.getSource() == entrenarBoton) {
 
             Mascota mascotaSeleccionada = null;
             for (Mascota mascotas : mascotasUsuario) {
@@ -129,10 +138,23 @@ public class MostrarMascota extends JInternalFrame implements MouseListener, Act
             }
             if (mascotaSeleccionada != null) {
                 this.getParent().add(new Entrenamiento(mascotaSeleccionada));
-                System.out.println("Si entrea");
-
             }
     
+        }
+        
+        if (e.getSource() == interactuarBoton) {
+            Mascota mascotaSeleccionada = null;
+            for (Mascota mascotas : mascotasUsuario) {
+
+                if (mascotas.getNombre().equals(listaMascotas.getSelectedValue().toString())) {
+                    mascotaSeleccionada = mascotas;
+                }
+
+            }
+            if (mascotaSeleccionada != null) {
+                InteractuarMascota interactuarMascota = new InteractuarMascota(mascotaSeleccionada);
+                this.getParent().add(interactuarMascota);
+            }
         }
     }
 
