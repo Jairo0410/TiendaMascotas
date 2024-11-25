@@ -76,6 +76,8 @@ public class AdministradorData {
             if (identificacion == Integer.parseInt(datos[1]) && contrasenna.equals(datos[3])) {
                 UsuarioEstandar usuario = new UsuarioEstandar(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]), datos[2], datos[3]);
                 System.out.println("Si esta");
+                
+                br.close();
                 return usuario;
             }
             linea = br.readLine();

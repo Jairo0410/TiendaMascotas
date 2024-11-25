@@ -109,6 +109,7 @@ public class InventarioUsuarioData {
             if (Integer.parseInt(datos[0]) == idArticulo && Integer.parseInt(datos[1]) == idUsuario) {
 
                 Articulo articulo = inventarioData.obtenerArticulo(idArticulo);
+                br.close();
                 return articulo;
             }
             linea = br.readLine();

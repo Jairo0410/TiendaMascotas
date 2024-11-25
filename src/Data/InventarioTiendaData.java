@@ -113,6 +113,7 @@ public class InventarioTiendaData {
             linea = br.readLine();
 
             if (articulo.getId() == idArticulo) {
+                br.close();
                 return articulo;
 
             }
