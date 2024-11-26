@@ -12,7 +12,7 @@ import java.io.IOException;
 
 /**
  *
- * @author jairo
+ * @author Kevin
  */
 public class UsuarioEstandarBusiness {
     private UsuarioEstandarData usuarioEstandarData;

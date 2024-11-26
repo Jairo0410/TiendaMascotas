@@ -1,5 +1,8 @@
 package Domain;
 
+import java.time.Instant;
+import java.util.Date;
+
 /**
  *
  * @author Kevin
@@ -27,11 +30,17 @@ public class Alimento extends Articulo {
     {
         float aumentoVitalidad = mascota.getVida() + valorNutricional;
         mascota.setVida(aumentoVitalidad);
+        mascota.setUltimaInteracion(Date.from(Instant.now()));
     }
 
     @Override
     public String representacionArchivo() {
         return this.getId() + ";" + this.getTipo() + ";" + this.getNombre() + ";" + this.getPrecio() + ";" + this.getCantExistente() + ";" + this.getValorNutricional();
+    }
+
+    @Override
+    public String getEfecto() {
+        return "+" + this.valorNutricional + " vida";
     }
 
 }

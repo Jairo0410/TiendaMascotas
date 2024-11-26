@@ -4,6 +4,9 @@
  */
 package Domain;
 
+import java.time.Instant;
+import java.util.Date;
+
 /**
  *
  * @author Kevin
@@ -18,6 +21,8 @@ public abstract class Mascota {
     private float experiencia;
     private String tipo;
     private int idUsuario;
+    private Date ultimaInteracion;
+    private Date ultimoRebajoVida;
 
     public Mascota(String nombre, String descripcion, int edad, float vida, float nivelDiversion, float experiencia, String tipo, int idUsuario) {
         this.nombre = nombre;
@@ -28,6 +33,7 @@ public abstract class Mascota {
         this.experiencia = experiencia;
         this.tipo = tipo;
         this.idUsuario = idUsuario;
+        this.ultimaInteracion = Date.from(Instant.now());
     }
 
     public Mascota(String nombre, String descripcion, int edad, String tipo, int idUsuario) {
@@ -39,6 +45,7 @@ public abstract class Mascota {
         this.vida = 100;
         this.nivelDiversion = 100;
         this.experiencia = 0;
+        this.ultimaInteracion = Date.from(Instant.now());
     }
 
     public Mascota() {
@@ -126,7 +133,37 @@ public abstract class Mascota {
     {   
         setExperiencia(experiencia + truco.getExperienciaRecompensa());
     }
-    
-    public abstract String representacionArchivo();
 
+    public Date getUltimaInteracion() {
+        return ultimaInteracion;
+    }
+
+    public void setUltimaInteracion(Date ultimaInteracion) {
+        this.ultimaInteracion = ultimaInteracion;
+    }
+    
+    public boolean actualizarPorcentajeVida() {
+        long momentoComparar;
+        
+        if (this.ultimoRebajoVida != null) {
+            momentoComparar = Math.max(this.ultimaInteracion.getTime(), this.ultimoRebajoVida.getTime());
+        } else {
+            momentoComparar = this.ultimaInteracion.getTime();
+        }
+        
+        long diffMilis = Date.from(Instant.now()).getTime() - momentoComparar;
+        long diffMinutos = diffMilis / 60000;
+        
+        long rebajo = (diffMinutos * 10);
+        
+        if (rebajo > 0) {
+            this.vida = this.vida - rebajo;
+            this.ultimoRebajoVida = Date.from(Instant.now());
+            return true;
+        }
+        
+        return false;
+    }
+
+    public abstract String representacionArchivo();
 }

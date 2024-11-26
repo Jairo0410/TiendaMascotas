@@ -1,5 +1,8 @@
 package Domain;
 
+import java.time.Instant;
+import java.util.Date;
+
 /**
  *
  * @author Kevin
@@ -23,12 +26,17 @@ public class Higiene extends Articulo{
 
     @Override
     public void efectoArticulo(Mascota mascota) {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        mascota.setUltimaInteracion(Date.from(Instant.now()));
     }
 
     @Override
     public String representacionArchivo() {
         return this.getId() + ";" + this.getTipo() + ";" + this.getNombre() + ";" + this.getPrecio() + ";" + this.getCantExistente() + ";" + this.getDuracionEfecto();
+    }
+
+    @Override
+    public String getEfecto() {
+        return "+" + this.duracionEfecto + " limpieza";
     }
     
 }

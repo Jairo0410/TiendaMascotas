@@ -64,6 +64,8 @@ public abstract class Articulo {
     public void setTipo(String tipo) {
         this.tipo = tipo;
     }
+    
+    public abstract String getEfecto();
 
     public abstract void efectoArticulo(Mascota mascota);
     

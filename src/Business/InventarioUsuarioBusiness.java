@@ -39,6 +39,15 @@ public class InventarioUsuarioBusiness {
 
     }
     
+    public void descontarInventario(UsuarioEstandar usuario, Articulo articulo, int cantDescuento) throws IOException, Exception {
+        if (cantDescuento > articulo.getCantExistente()) {
+            throw new Exception("No hay suficientes articulos");
+        }
+        
+        articulo.setCantExistente(articulo.getCantExistente() - cantDescuento);
+        inventarioUData.actualizarArticulo(articulo, usuario);
+    }
+    
     public ArrayList<Articulo> obtenerInventarioUsuario(int idUsuario) throws IOException {
         return inventarioUData.obtenerInventario(idUsuario);
     }

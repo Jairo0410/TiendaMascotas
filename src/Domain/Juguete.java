@@ -1,5 +1,8 @@
 package Domain;
 
+import java.time.Instant;
+import java.util.Date;
+
 /**
  *
  * @author Kevin
@@ -26,11 +29,17 @@ public class Juguete extends Articulo {
     {
         float aumentoDiversion = mascota.getNivelDiversion()+ nivelDiversion;
         mascota.setNivelDiversion(aumentoDiversion);
+        mascota.setUltimaInteracion(Date.from(Instant.now()));
     }
 
     @Override
     public String representacionArchivo() {
         return this.getId() + ";" + this.getTipo() + ";" + this.getNombre() + ";" + this.getPrecio() + ";" + this.getCantExistente() + ";" + this.getNivelDiversion();
+    }
+
+    @Override
+    public String getEfecto() {
+        return "+" + this.nivelDiversion + " diversion";
     }
 
 }
